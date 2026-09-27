@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaya Surya | Creative Technologist & AI Engineer Portfolio</title>
+  <meta name="description" content="Portfolio of Jaya Surya - Final-Year B.Tech CSE student & Creative Technologist building technology with code, creativity and curiosity.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪄</text></svg>">
+
+  <!-- Google Fonts: Medieval & Fantasy Typography + Modern Clean Body Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+    // Always start at top on page reload or load
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=8.3">
+</head>
+<body class="lumos-mode">
+
+  <!-- Magical Spell Progress Beam at Top of Page -->
+  <div id="spell-progress-bar" class="spell-progress-bar">
+    <div class="progress-glow-tip"></div>
+  </div>
+
+  <!-- Full-Screen Arcane Portal Apparition Overlay for Page Transitions -->
+  <div id="arcane-portal-overlay" class="portal-overlay theme-hero">
+    <div class="portal-curtain-left"></div>
+    <div class="portal-curtain-right"></div>
+    <div class="portal-vortex-core">
+      <div class="portal-ring" id="portal-ring"></div>
+      <div class="portal-icon" id="portal-icon">⏳</div>
+      <div class="portal-runes" id="portal-runes">✦ CHRONO WARP · TIME-TURNER TO SANCTUM ✦</div>
+      <div class="portal-subtext" id="portal-subtext">Rewinding the tapestry of time into the Grand Sanctum...</div>
+    </div>
+  </div>
+
+  <!-- Interactive Sparkle Canvas for Wand Trail -->
+  <canvas id="magic-canvas"></canvas>
+
+  <!-- Marauder's Map Animated Ink Footsteps Canvas -->
+  <canvas id="marauders-canvas"></canvas>
+
+  <!-- Custom Wand Cursor -->
+  <div id="wand-cursor" class="wand-cursor">
+    <div class="wand-tip"></div>
+  </div>
+
+  <!-- Audio Controls & Spell Quick-Cast Floating Pill -->
+  <div class="enchanted-pill audio-widget" id="audio-widget">
+    <button id="audio-toggle-btn" class="magical-btn-mini" title="Toggle Magical Hogwarts Ambiance">
+      <span class="icon" id="audio-icon">🎵</span>
+      <span class="btn-text" id="audio-status">Ambiance</span>
+    </button>
+    <div class="lumos-toggle-wrap">
+      <button id="lumos-btn" class="magical-btn-mini" title="Cast Lumos / Nox (Press L)">
+        <span class="icon">✨</span>
+        <span class="btn-text">Lumos [L]</span>
+      </button>
+    </div>
+    <button id="accio-btn" class="magical-btn-mini" title="Cast Accio: Summons Golden Snitch to Wand! (Press A)">
+      <span class="icon">⚡</span>
+      <span class="btn-text">Accio [A]</span>
+    </button>
+    <button id="patronus-btn" class="magical-btn-mini" title="Cast Expecto Patronum: Silver Ethereal Stag! (Press P)">
+      <span class="icon">🦌</span>
+      <span class="btn-text">Patronus [P]</span>
+    </button>
+    <button id="sorting-hat-btn" class="magical-btn-mini" title="Consult the Sorting Hat! (Press S)">
+      <span class="icon">🎩</span>
+      <span class="btn-text">Sort [S]</span>
+    </button>
+    <button id="wand-core-btn" class="magical-btn-mini" title="Ollivanders: Change Wand Core & Spell Trail (Press W)">
+      <span class="icon">🪄</span>
+      <span class="btn-text">Wand [W]</span>
+    </button>
+    <button id="open-resume-btn" class="magical-btn-mini highlight-pill-btn" title="Open Hogwarts Parchment Resume (Press R)">
+      <span class="icon">📜</span>
+      <span class="btn-text">CV [R]</span>
+    </button>
+  </div>
+
+  <!-- Full-Screen Ethereal Patronus Overlay -->
+  <div id="patronus-overlay" class="patronus-overlay">
+    <div class="patronus-stag-silhouette">🦌</div>
+    <div class="patronus-runic-title">✦ EXPECTO PATRONUM ✦</div>
+  </div>
+
+  <!-- Floating Spell Incantation Banner -->
+  <div id="spell-incantation-banner" class="spell-incantation-banner"></div>
+
+  <!-- Golden Snitch Achievement Toast -->
+  <div id="snitch-achievement-modal" class="snitch-toast glass-panel hidden">
+    <div class="snitch-toast-trophy">🏆</div>
+    <div class="snitch-toast-text">
+      <h4 class="snitch-toast-title">150 POINTS TO GRYFFINDOR!</h4>
+      <p class="snitch-toast-desc">Master Seeker! You caught the elusive Golden Snitch in flight.</p>
+    </div>
+    <button id="close-snitch-toast" class="toast-close-btn" aria-label="Close Toast">✕</button>
+  </div>
+
+  <!-- Flying Snowy Owl Arrival Sequence (Seamless Non-Glitching Cutout) -->
+  <div id="owl-flight-box" class="owl-flight-box">
+    <img id="owl-flying-sprite" class="owl-flying-sprite" src="owl_flight_transparent.webp?v=4.0" alt="Hedwig Snowy Owl Flying with Hogwarts Letter">
+  </div>
+
+  <!-- Realm Navigation Bar -->
+  <header class="realm-nav-container">
+    <nav class="realm-nav glass-panel">
+
+      <a href="#hero" class="brand-crest" aria-label="Jaya Surya Home Sanctum">
+        <div class="magical-brand-logo" aria-hidden="true">
+          <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#740001"/>
+                <stop offset="50%" stop-color="#4a0404"/>
+                <stop offset="100%" stop-color="#1a0000"/>
+              </linearGradient>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd700"/>
+                <stop offset="50%" stop-color="#f5c542"/>
+                <stop offset="100%" stop-color="#b48246"/>
+              </linearGradient>
+              <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            <!-- Outer Runic Ring -->
+            <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="6 3" opacity="0.85"/>
+            <circle cx="50" cy="50" r="40" stroke="url(#goldGrad)" stroke-width="1.2" opacity="0.6"/>
+            <!-- Arcane Crest Shield -->
+            <path d="M50 14 L76 25 C76 52 63 72 50 84 C37 72 24 52 24 25 Z" fill="url(#shieldGrad)" stroke="url(#goldGrad)" stroke-width="2.5" filter="url(#logoGlow)"/>
+            <!-- Crossed Magic Wand -->
+            <line x1="33" y1="67" x2="67" y2="33" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round"/>
+            <polygon points="67,27 70,33 76,36 70,39 67,45 64,39 58,36 64,33" fill="#ffffff"/>
+            <!-- Intertwined JS Monogram -->
+            <path d="M42 36 H47 V55 C47 60 43 63 37 62 C34 61 32 59 31 57" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M63 43 C63 37 53 37 52 44 C51 50 62 48 62 56 C62 63 51 62 47 58" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.95"/>
+            <!-- Apex Radiant Star -->
+            <circle cx="50" cy="19" r="2.2" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">JAYA SURYA</span>
+          <span class="brand-subtitle">CREATIVE TECHNOLOGIST</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-item active"><span class="nav-rune">ᚱ</span> Sanctum</a></li>
+        <li><a href="#about" class="nav-item"><span class="nav-rune">ᛟ</span> Wizard</a></li>
+        <li><a href="#skills" class="nav-item"><span class="nav-rune">ᛋ</span> Spellbook</a></li>
+        <li><a href="#projects" class="nav-item"><span class="nav-rune">ᚹ</span> Chamber</a></li>
+        <li><a href="#journey" class="nav-item"><span class="nav-rune">ᛏ</span> Chronicles</a></li>
+        <li><a href="#contact" class="nav-item"><span class="nav-rune">✉</span> Owl Post</a></li>
+        <li><button type="button" id="nav-resume-btn" class="nav-item nav-btn-scroll" title="Open Hogwarts Parchment Resume"><span class="nav-rune">📜</span> Parchment CV</button></li>
+      </ul>
+
+      <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Realm Content -->
+  <main>
+
+    <!-- =========================================================================
+         1. SANCTUM — HOME
+         ========================================================================= -->
+    <section id="hero" class="realm-section hero-section">
+      <div class="hero-bg-container">
+        <!-- Living Video Portrait -->
+        <video class="hero-video-bg" autoplay loop muted playsinline poster="ChatGPT Image Sep 25, 2026, 12_24_10 PM.png">
+          <source src="Young_man_holding_glowing_orb_20260925140647.mp4" type="video/mp4">
+          <img src="ChatGPT Image Sep 25, 2026, 12_24_10 PM.png" alt="Jaya Surya holding glowing magical code orb">
+        </video>
+        <div class="hero-vignette"></div>
+        <div class="hero-aurora"></div>
+      </div>
+
+      <div class="container hero-content-wrapper">
+        <div class="hero-badges">
+          <span class="hero-pill glass-card">
+            <span class="status-orb"></span> Final-Year B.Tech CSE · Rajiv Gandhi College of Engg & Tech
+          </span>
+          <span class="hero-pill glass-card owl-pill">
+            <span class="owl-icon">🪄</span> Creative Technologist & Innovator
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-greeting">PORTFOLIO OF</span>
+          <span class="hero-name glow-text">JAYA SURYA</span>
+          <span class="hero-role">
+            <span class="role-symbol">✦</span>
+            <span id="hero-typing-rune" class="typing-text">Creative Technologist</span>
+            <span class="typing-cursor">|</span>
+          </span>
+        </h1>
+
+        <div class="hero-quote-box glass-card">
+          <p class="hero-quote">
+            “Building technology with code, creativity and curiosity.”
+          </p>
+        </div>
+
+        <p class="hero-description">
+          Focused on crafting impactful solutions across <strong>Artificial Intelligence</strong>, <strong>Software Development</strong>, <strong>UI/UX Design</strong>, <strong>Creative Technology</strong>, and <strong>Content Creation</strong>.
+        </p>
+
+        <!-- Focus Highlights Tags -->
+        <div class="hero-focus-tags">
+          <span class="focus-tag">🤖 Artificial Intelligence</span>
+          <span class="focus-tag">💻 Software Development</span>
+          <span class="focus-tag">🎨 UI/UX Design</span>
+          <span class="focus-tag">✨ Creative Technology</span>
+          <span class="focus-tag">🎬 Content Creation</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn-arcane btn-primary">
+            <span class="btn-sparkle">✦</span>
+            <span>Explore Chamber of Works</span>
+          </a>
+          <a href="#contact" class="btn-arcane btn-secondary">
+            <span class="btn-sparkle">✉</span>
+            <span>Dispatch An Owl</span>
+          </a>
+        </div>
+
+        <!-- Interactive Golden Snitch Companion -->
+        <div id="golden-snitch" class="golden-snitch" title="Catch the Golden Snitch!">
+          <div class="snitch-wing wing-left"></div>
+          <div class="snitch-core"></div>
+          <div class="snitch-wing wing-right"></div>
+        </div>
+      </div>
+
+      <div class="scroll-down-indicator">
+        <a href="#about" class="scroll-arrow" aria-label="Scroll to About Me">
+          <span class="scroll-gem"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         2. WIZARD — ABOUT ME
+         ========================================================================= -->
+    <section id="about" class="realm-section about-section">
+      <!-- Background Video: Wizard on Balcony viewing Hogwarts Castle -->
+      <div class="section-video-bg-wrap">
+        <video class="section-video-bg about-video" autoplay loop muted playsinline poster="thumb_Man_on_balcony_viewing_castle_20260926205727.jpg">
+          <source src="bg/Man_on_balcony_viewing_castle_20260926205727.mp4" type="video/mp4">
+        </video>
+        <div class="section-video-overlay about-overlay"></div>
+      </div>
+
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">WIZARD — ABOUT ME</span>
+          <h2 class="section-heading glow-text">About Jaya Surya</h2>
+          <div class="golden-divider"></div>
+          <p class="section-subtext">The mind, the craft, and the creative passion behind the technology.</p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Wizard Portrait Frame -->
+          <div class="about-visual-column">
+            <div class="magic-frame glass-panel">
+              <div class="frame-corners"></div>
+              <video class="study-video" autoplay loop muted playsinline poster="thumb_Magical_newspaper.jpg">
+                <source src="bg/Magical_newspaper_animation_20260926224011.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Floating polaroid memories overlay -->
+            <div class="polaroid-cluster">
+              <div class="polaroid-card p1 glass-panel">
+                <span>⚡ Tech + Creativity</span>
+              </div>
+              <div class="polaroid-card p2 glass-panel">
+                <span>🎵 Music & Filmmaking</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wizard Bio & Philosophy -->
+          <div class="about-text-column">
+            <h3 class="about-story-title">Turning Ideas into Meaningful & Practical Digital Realities</h3>
+            
+            <p class="about-paragraph">
+              <strong>Jaya Surya</strong> is a final-year <strong>B.Tech Computer Science and Engineering</strong> student from <strong>Rajiv Gandhi College of Engineering and Technology</strong>, with a strong interest in <em>Artificial Intelligence</em>, <em>software development</em>, <em>UI/UX design</em>, and <em>creative technology</em>.
+            </p>
+
+            <p class="about-paragraph">
+              He enjoys turning ideas into practical digital experiences and exploring how technology can be combined with creativity to solve real-world problems. His technical journey encompasses web development, AI-based projects, Android application development, software testing, and interactive digital experiences.
+            </p>
+
+            <p class="about-paragraph">
+              Beyond technology, Jaya Surya possesses a vibrant creative soul. He is passionately interested in <strong>singing</strong>, <strong>acting</strong>, <strong>drawing</strong>, <strong>video editing</strong>, <strong>AI image generation</strong>, <strong>music</strong>, <strong>movies</strong>, <strong>web series</strong>, and <strong>travelling</strong>. He thrives on experimenting with new technologies, learning through hands-on projects, and continuously elevating his technical and artistic mastery.
+            </p>
+
+            <!-- Formula Box -->
+            <div class="philosophy-formula-box glass-panel">
+              <span class="formula-label">⚡ CORE APPROACH & PHILOSOPHY:</span>
+              <div class="formula-equation">
+                <span class="eq-item">Technology</span>
+                <span class="eq-plus">+</span>
+                <span class="eq-item">Creativity</span>
+                <span class="eq-plus">+</span>
+                <span class="eq-item">Curiosity</span>
+                <span class="eq-plus">+</span>
+                <span class="eq-item">Problem Solving</span>
+              </div>
+            </div>
+
+            <p class="about-belief">
+              He believes that good technology should not only work well, but should also create a <strong>meaningful and engaging experience</strong> for people.
+            </p>
+
+            <!-- Personal Closing Line -->
+            <div class="about-closing-card glass-card">
+              <span class="wand-icon">✦</span>
+              <p class="closing-quote">
+                “Curious by nature, creative by passion, and always building something new.”
+              </p>
+            </div>
+
+            <div class="magical-metrics-grid">
+              <div class="metric-card glass-card">
+                <div class="metric-number glow-text">CSE</div>
+                <div class="metric-label">B.Tech Final Year</div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="metric-number glow-text">7+</div>
+                <div class="metric-label">Flagship Projects</div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="metric-number glow-text">1000+</div>
+                <div class="metric-label">Songs Curated</div>
+              </div>
+              <div class="metric-card glass-card">
+                <div class="metric-number glow-text">∞</div>
+                <div class="metric-label">Curiosity & Vision</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SPELLBOOK — SKILLS
+         ========================================================================= -->
+    <section id="skills" class="realm-section skills-section">
+      <!-- Background Video: Wizard casting spell from grimoire -->
+      <div class="section-video-bg-wrap">
+        <video class="section-video-bg skills-video" autoplay loop muted playsinline poster="thumb_Wizard_casting_spell_from_book_20260926215952.jpg">
+          <source src="bg/Wizard_casting_spell_from_book_20260926215952.mp4" type="video/mp4">
+        </video>
+        <div class="section-video-overlay skills-overlay"></div>
+      </div>
+
+      <div class="container skills-content">
+        <div class="section-header text-center">
+          <span class="section-tag">SPELLBOOK — SKILLS</span>
+          <h2 class="section-heading glow-text">The Arcane Spellbook & Arsenal</h2>
+          <div class="golden-divider"></div>
+          <p class="section-subtext">Comprehensive skill matrix uniting software engineering, artificial intelligence, UI/UX, and creative arts.</p>
+        </div>
+
+        <!-- Full Stack Honours Diploma Highlight Badge -->
+        <div class="honours-diploma-banner glass-panel">
+          <span class="diploma-icon">📜</span>
+          <div class="diploma-text">
+            <strong>Honours Diploma in Full Stack Development</strong>
+            <span>Proficient in end-to-end frontend, backend architectures, databases, and deployment pipelines.</span>
+          </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="spell-filters">
+          <button class="filter-tab active" data-filter="all">All Disciplines</button>
+          <button class="filter-tab" data-filter="development">Development</button>
+          <button class="filter-tab" data-filter="ai">AI & Technology</button>
+          <button class="filter-tab" data-filter="design">Design</button>
+          <button class="filter-tab" data-filter="creative">Creative Arts</button>
+        </div>
+
+        <!-- Grimoire Cards Grid -->
+        <div class="spells-grid">
+
+          <!-- 1. Development -->
+          <div class="spell-card glass-card chocolate-frog-tilt" data-category="development">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-spell-badge">✦ WIZARD SKILL CARD #01 ✦</div>
+            <div class="spell-card-header">
+              <span class="spell-icon">💻</span>
+              <span class="spell-school">Transfiguration</span>
+            </div>
+            <h3 class="spell-name">Development & Engineering</h3>
+            <p class="spell-desc">Building resilient web, mobile and full-stack software applications.</p>
+            <div class="spell-runes-list">
+              <span class="rune-pill"><span class="icon">🌐</span> Web Development (Full-Stack)</span>
+              <span class="rune-pill"><span class="icon">📱</span> Android Application Development</span>
+              <span class="rune-pill"><span class="icon">⚡</span> JavaScript (ESNext)</span>
+              <span class="rune-pill"><span class="icon">🐍</span> Python</span>
+              <span class="rune-pill"><span class="icon">🧱</span> HTML5 & Modern CSS3</span>
+              <span class="rune-pill"><span class="icon">🧪</span> Software Testing & Quality Assurance</span>
+            </div>
+          </div>
+
+          <!-- 2. AI & Technology -->
+          <div class="spell-card glass-card chocolate-frog-tilt" data-category="ai">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-spell-badge">✦ WIZARD SKILL CARD #02 ✦</div>
+            <div class="spell-card-header">
+              <span class="spell-icon">🧠</span>
+              <span class="spell-school">Divination & Charms</span>
+            </div>
+            <h3 class="spell-name">AI & Advanced Technology</h3>
+            <p class="spell-desc">Leveraging neural intelligence, voice computing, and on-device offline models.</p>
+            <div class="spell-runes-list">
+              <span class="rune-pill"><span class="icon">🤖</span> Artificial Intelligence & LLMs</span>
+              <span class="rune-pill"><span class="icon">🛠️</span> AI-Assisted Development</span>
+              <span class="rune-pill"><span class="icon">🔒</span> Offline AI Systems (Privacy-First)</span>
+              <span class="rune-pill"><span class="icon">🎙️</span> Voice AI & Speech Processing</span>
+              <span class="rune-pill"><span class="icon">🎨</span> AI Image Generation & Prompt Craft</span>
+              <span class="rune-pill"><span class="icon">📡</span> Mesh Networking & Peer-to-Peer</span>
+            </div>
+          </div>
+
+          <!-- 3. Design -->
+          <div class="spell-card glass-card chocolate-frog-tilt" data-category="design">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-spell-badge">✦ WIZARD SKILL CARD #03 ✦</div>
+            <div class="spell-card-header">
+              <span class="spell-icon">✨</span>
+              <span class="spell-school">Alchemy & Visuals</span>
+            </div>
+            <h3 class="spell-name">Design & User Experience</h3>
+            <p class="spell-desc">Designing interfaces that are intuitive, delightful, and human-centered.</p>
+            <div class="spell-runes-list">
+              <span class="rune-pill"><span class="icon">📐</span> UI/UX Design & Wireframing</span>
+              <span class="rune-pill"><span class="icon">💡</span> Creative Problem Solving</span>
+              <span class="rune-pill"><span class="icon">📖</span> Visual Storytelling</span>
+              <span class="rune-pill"><span class="icon">🎯</span> Interactive Digital Experiences</span>
+              <span class="rune-pill"><span class="icon">💎</span> Creative Design & Prototyping</span>
+            </div>
+          </div>
+
+          <!-- 4. Creative Arts -->
+          <div class="spell-card glass-card chocolate-frog-tilt" data-category="creative">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-spell-badge">✦ WIZARD SKILL CARD #04 ✦</div>
+            <div class="spell-card-header">
+              <span class="spell-icon">🎭</span>
+              <span class="spell-school">Enchantment & Expression</span>
+            </div>
+            <h3 class="spell-name">Creative Arts & Media</h3>
+            <p class="spell-desc">Storytelling through cinema, music curation, singing, acting, and drawing.</p>
+            <div class="spell-runes-list">
+              <span class="rune-pill"><span class="icon">🎬</span> Video Editing & Motion Graphics</span>
+              <span class="rune-pill"><span class="icon">🎤</span> Singing & Vocal Arts</span>
+              <span class="rune-pill"><span class="icon">🎭</span> Acting & Performing</span>
+              <span class="rune-pill"><span class="icon">✏️</span> Drawing & Visual Art</span>
+              <span class="rune-pill"><span class="icon">🎵</span> Music & Content Creation</span>
+              <span class="rune-pill"><span class="icon">📱</span> Instagram Visual Series Direction</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. CHAMBER — PROJECTS
+         ========================================================================= -->
+    <section id="projects" class="realm-section projects-section">
+      <!-- Background Video: Man watching floating citadel castles -->
+      <div class="section-video-bg-wrap">
+        <video class="section-video-bg projects-video" autoplay loop muted playsinline poster="thumb_Man_watching_floating_castles_20260926210704.jpg">
+          <source src="bg/Man_watching_floating_castles_20260926210704.mp4" type="video/mp4">
+        </video>
+        <div class="section-video-overlay projects-overlay"></div>
+      </div>
+
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CHAMBER — PROJECTS</span>
+          <h2 class="section-heading glow-text">Chamber of Works & Innovations</h2>
+          <div class="golden-divider"></div>
+          <p class="section-subtext">Explore Jaya Surya's real-world software engineering, AI systems, mobile applications, and web platforms.</p>
+        </div>
+
+        <!-- Featured Banner: Castle Study -->
+        <div class="featured-project-banner glass-panel">
+          <div class="banner-video-wrap">
+            <img src="ChatGPT Image Sep 25, 2026, 12_23_50 PM.png" alt="Library Laboratory with Castle Hologram" class="banner-img">
+            <div class="banner-badge glass-card">
+              <span>✦ Innovation Headquarters</span>
+            </div>
+          </div>
+          <div class="banner-content">
+            <span class="project-tag">FLAGSHIP RESEARCH & APPLIED AI</span>
+            <h3 class="banner-title">Pioneering Intelligent Systems & Decentralized Tools</h3>
+            <p class="banner-text">
+              From automating software testing with AI knowledge systems to building offline mesh communicators and local private voice companions, each creation is engineered with problem-solving depth and human-centered design.
+            </p>
+            <div class="project-tags">
+              <span class="tag">AI Systems</span>
+              <span class="tag">Mesh Networks</span>
+              <span class="tag">Android Voice AI</span>
+              <span class="tag">Web Tech</span>
+              <span class="tag">Software Testing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chamber of Projects Filter Tabs & Search Bar -->
+        <div class="projects-control-bar glass-panel">
+          <div class="project-search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="project-search-input" class="project-search-input" placeholder="Search spells, technologies, or stacks (e.g. Python, AI, Android, Web)..." aria-label="Search projects">
+            <button type="button" id="clear-project-search" class="clear-search-btn hidden" title="Clear Search">✕</button>
+          </div>
+          <div class="project-filter-tabs" id="project-filter-tabs">
+            <button type="button" class="p-filter-tab active" data-filter="all"><span>✦</span> All Chamber Works (7)</button>
+            <button type="button" class="p-filter-tab" data-filter="ai"><span>🤖</span> AI & Systems</button>
+            <button type="button" class="p-filter-tab" data-filter="web"><span>🌐</span> Web & Full-Stack</button>
+            <button type="button" class="p-filter-tab" data-filter="mobile"><span>📱</span> Android & Offline</button>
+          </div>
+        </div>
+
+        <!-- Chocolate Frog Cards Instruction Pill -->
+        <div class="cf-instruction-pill glass-panel">
+          <span class="cf-pill-icon">🐸</span>
+          <div class="cf-pill-text">
+            <strong>Chocolate Frog Collectible Cards:</strong> Hover to explore 3D holographic foil glimmer · Click <strong>"Flip Card"</strong> to reveal the Architect's secret blueprints!
+          </div>
+        </div>
+
+        <!-- Detailed Projects Grid (All 7 Featured Projects) -->
+        <div class="projects-detailed-grid" id="projects-grid">
+
+          <!-- Project 1: Integrated AI Knowledge Systems -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="ai" data-card-id="1">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 01 ✦</span>
+                  <span class="cf-rarity-pill">★ NICOLAS FLAMEL TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">AI & Software Testing</span>
+                  <span class="badge-flagship">★ Flagship AI System</span>
+                </div>
+                <h3 class="p-card-title">Integrated AI Knowledge Systems to Automate Bug Reporting</h3>
+                <p class="p-card-desc">
+                  AI-powered software testing, automated bug reporting, knowledge retrieval, bug analysis and intelligent report generation.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Manual bug reporting is time-intensive, inconsistent, and often misses cross-correlations with historical test repositories and previous defects.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>An intelligent end-to-end framework integrating knowledge retrieval algorithms with automated test executors to analyze failures, query historical bug knowledge, and auto-compose high-fidelity bug reports.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Automated test log inspection & anomaly detection</li>
+                      <li>Semantic knowledge retrieval matching past regressions</li>
+                      <li>Intelligent structured bug report & ticket generation</li>
+                      <li>Severity scoring and root-cause classification</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>Artificial Intelligence</span>
+                  <span>Knowledge Retrieval</span>
+                  <span>Python</span>
+                  <span>Automated Testing</span>
+                  <span>NLP</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #01</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        CI/CD Execution Logs ➔ AST & Anomaly Parsing ➔ Semantic Vector Store Search (Historical Regressions) ➔ LLM Knowledge Synthesis ➔ Automated Jira/GitHub Issue Dispatch.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Deduplication Heuristic:</strong> Cosine vector similarity eliminates duplicate bug reports by up to 70% before issue creation.</li>
+                        <li><strong>Context Optimization:</strong> Distills multi-megabyte test execution logs down to core failing stack frames to minimize API token cost.</li>
+                        <li><strong>Deterministic Schema:</strong> Enforces JSON-schema output validation for seamless direct integration with bug tracking databases.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>Python</span>
+                        <span>Vector Embeddings</span>
+                        <span>NLP Pipelines</span>
+                        <span>CI/CD Automation</span>
+                        <span>Bug Triage</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: DevDoctor AI -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="ai web" data-card-id="2">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 02 ✦</span>
+                  <span class="cf-rarity-pill">★ MERLIN TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">Developer Tooling</span>
+                  <span class="badge-ai">AI Platform</span>
+                </div>
+                <h3 class="p-card-title">DevDoctor AI</h3>
+                <p class="p-card-desc">
+                  AI-assisted developer and intelligent bug-support platform for modern software engineers.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Developers spend immense hours deciphering obscure stack traces, syntax anomalies, and library conflicts without tailored contextual remediation.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>An interactive AI diagnostic companion that parses code context, identifies bug signatures, explains the underlying malfunction, and suggests verified code patches.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Instant stack trace & runtime error diagnostics</li>
+                      <li>Codebase context-aware fix suggestions</li>
+                      <li>Interactive developer troubleshooting chat</li>
+                      <li>Multi-language code optimization guidance</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>AI-Assisted Dev</span>
+                  <span>Python</span>
+                  <span>React</span>
+                  <span>FastAPI</span>
+                  <span>LLM APIs</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #02</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        Client IDE / Terminal Hook ➔ Error Trace AST Normalization ➔ Multi-Model Contextual Diagnostics ➔ Side-by-Side Unified Git Diff Patch Synthesizer.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Token-Efficient Distillation:</strong> Parses stack frames to isolate precisely affected functions, preventing huge LLM context blowout.</li>
+                        <li><strong>Interactive Troubleshooting:</strong> Employs stateful chat history with active codebase snapshots for continuous progressive debugging.</li>
+                        <li><strong>Multi-Compiler Heuristics:</strong> Pre-mapped compiler fault patterns for Python, JS/TS, Java, and C++ for ultra-fast instant answers.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>FastAPI</span>
+                        <span>React</span>
+                        <span>LLM APIs</span>
+                        <span>AST Tracing</span>
+                        <span>Sub-200ms</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Rasagulla -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="ai mobile" data-card-id="3">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 03 ✦</span>
+                  <span class="cf-rarity-pill">★ ROWENA RAVENCLAW TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">Android & Edge AI</span>
+                  <span class="badge-privacy">🔒 100% Offline & Private</span>
+                </div>
+                <h3 class="p-card-title">Rasagulla — Personal Offline Voice AI</h3>
+                <p class="p-card-desc">
+                  Personal offline AI voice assistant for Android with local processing, voice interaction, personal memory, and privacy-focused functionality.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Conventional voice assistants constantly upload intimate speech data to remote cloud servers, sacrificing user privacy and requiring uninterrupted high-speed internet.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>A self-contained Android voice companion running localized edge models with zero remote network pings, maintaining local user memory and instant voice interaction.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Completely offline local speech recognition & voice synthesis</li>
+                      <li>Encrypted on-device personal memory bank</li>
+                      <li>Natural voice conversational interaction</li>
+                      <li>Zero latency voice triggers without cellular data</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>Android Development</span>
+                  <span>Offline AI Systems</span>
+                  <span>Voice AI</span>
+                  <span>Local Processing</span>
+                  <span>Privacy</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #03</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        On-Device Microphone Audio Capture ➔ Quantized Acoustic VOSK/Whisper STT ➔ Local Deterministic Intent Slot-Filling ➔ AES-256 SQLite Personal Memory ➔ Edge Neural TTS.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Air-Gapped Privacy:</strong> Zero network permissions in AndroidManifest.xml guarantees mathematically complete data confidentiality.</li>
+                        <li><strong>Low-Latency Edge Models:</strong> Quantized 4-bit neural weights run smoothly on mobile ARM CPU NEON cores without thermal throttling.</li>
+                        <li><strong>Encrypted Memory Store:</strong> Encrypted SQLite database stores personal context and preferences locally on flash storage.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>Android Kotlin/Java</span>
+                        <span>Edge AI Quantization</span>
+                        <span>VOSK Engine</span>
+                        <span>AES-256 SQLite</span>
+                        <span>Zero Network</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Irisyn -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="mobile" data-card-id="4">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 04 ✦</span>
+                  <span class="cf-rarity-pill">★ GODRIC GRYFFINDOR TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">Decentralized Networking</span>
+                  <span class="badge-mesh">Offline Mesh</span>
+                </div>
+                <h3 class="p-card-title">Irisyn — Offline Mesh Communication System</h3>
+                <p class="p-card-desc">
+                  Decentralized offline mesh network utilizing Bluetooth, Wi-Fi Direct, relay communication, and store-and-forward networking.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>During natural catastrophes, remote expeditions, or severe network blackouts, centralized cellular towers fail, leaving individuals completely stranded without communication.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>An ad-hoc peer-to-peer mesh architecture hopping packets through surrounding smartphones via Wi-Fi Direct and Bluetooth LE without requiring towers, satellites, or internet.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Wi-Fi Direct & Bluetooth LE auto-discovery mesh</li>
+                      <li>Store-and-forward multi-hop packet routing</li>
+                      <li>Peer-to-peer encrypted text & alert broadcasting</li>
+                      <li>Disaster & off-grid resilient communication</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>Android SDK</span>
+                  <span>Bluetooth Low Energy</span>
+                  <span>Wi-Fi Direct</span>
+                  <span>Mesh Protocols</span>
+                  <span>P2P Networking</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #04</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        Wi-Fi Direct & BLE Beacon Proximity Discovery ➔ Dynamic Mesh Ad-Hoc Topology Formation ➔ Store-and-Forward Packet Hopping with Bloom Filter Deduplication ➔ Curve25519 E2E Payload Decryption.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Storm Prevention:</strong> Epidemic gossip protocol equipped with hop TTL and probabilistic Bloom filters prevents catastrophic broadcast packet loops.</li>
+                        <li><strong>Store-and-Forward Buffers:</strong> Packets persist in local SQLite buffers during network partitions until neighbor nodes enter physical radio distance.</li>
+                        <li><strong>Cryptographic Integrity:</strong> End-to-end payload signature guarantees messages cannot be spoofed or altered by intermediate relay nodes.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>Android SDK</span>
+                        <span>Wi-Fi Direct</span>
+                        <span>BLE GATT</span>
+                        <span>Curve25519</span>
+                        <span>Mesh Protocols</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: LOVPURA -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="web mobile" data-card-id="5">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 05 ✦</span>
+                  <span class="cf-rarity-pill">★ HELGA HUFFLEPUFF TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">Social & Hyperlocal</span>
+                  <span class="badge-social">Decentralized</span>
+                </div>
+                <h3 class="p-card-title">LOVPURA</h3>
+                <p class="p-card-desc">
+                  Nearby-first decentralized social communication and entertainment platform connecting immediate physical communities.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Global social algorithms isolate people from their immediate physical surroundings, missing authentic neighborhood interactions and real-time local engagement.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>A proximity-based decentralized platform emphasizing hyperlocal discovery, localized entertainment streams, and genuine nearby connection.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Nearby-first proximity user discovery</li>
+                      <li>Real-time community feeds & localized entertainment</li>
+                      <li>Decentralized messaging and interactive circles</li>
+                      <li>Modern responsive UI and engaging community hubs</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>Web & Mobile</span>
+                  <span>Decentralized Arch</span>
+                  <span>Geo-Proximity</span>
+                  <span>Real-Time WebSockets</span>
+                  <span>UI/UX</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #05</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        Coarse Geohash Discrete Spatial Bucketing ➔ Proximity Node Clustering ➔ Real-time Multiplexed WebSocket Channels ➔ Ephemeral Community Feed & Event Dispatch.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Location Privacy:</strong> Truncates GPS into coarse 500-meter Geohash cells so exact coordinates never leak across the public network.</li>
+                        <li><strong>Battery Preservation:</strong> Uses event-driven spatial entry triggers instead of continuous GPS background tracking, drastically preserving phone battery.</li>
+                        <li><strong>Sub-Millisecond Broadcast:</strong> In-memory pub/sub clustering handles thousands of simultaneous nearby chatters without database bottlenecks.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>Web & Mobile</span>
+                        <span>WebSockets</span>
+                        <span>Geohash Clusters</span>
+                        <span>Node.js</span>
+                        <span>Reactive UI</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: SmartEdu -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="web" data-card-id="6">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 06 ✦</span>
+                  <span class="cf-rarity-pill">★ SALAZAR SLYTHERIN TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">EdTech & Web Platform</span>
+                  <span class="badge-edu">Education</span>
+                </div>
+                <h3 class="p-card-title">SmartEdu — Digital Learning Hub</h3>
+                <p class="p-card-desc">
+                  Education-focused web platform delivering intuitive curriculum navigation, interactive assessments, and streamlined student collaboration.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Cluttered, counter-intuitive educational portals disrupt student engagement and lack structured access to core learning resources.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>A unified, clean digital education platform organizing course repositories, knowledge check evaluations, and student progress metrics.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Structured modular course curriculum viewer</li>
+                      <li>Interactive student self-assessment testing engine</li>
+                      <li>Resource download vault for notes & syllabus</li>
+                      <li>Responsive dashboard for desktop & mobile learning</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>HTML5 / CSS3</span>
+                  <span>JavaScript</span>
+                  <span>Node.js</span>
+                  <span>MongoDB</span>
+                  <span>UI/UX Design</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #06</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        Role-Based Access Guard (Student / Instructor) ➔ Hierarchical Course Taxonomy Store ➔ Stateful Quiz Assessment Machine ➔ Progress Analytics & Performance Visualizer.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Data Model Optimization:</strong> Normalized document schema with indexed query paths guarantees sub-50ms dashboard render latency.</li>
+                        <li><strong>Offline-First Resilience:</strong> Optimistic local state caching ensures students do not lose exam answers during momentary Wi-Fi interruptions.</li>
+                        <li><strong>Modular Architecture:</strong> Decoupled component architecture allows rapid plug-and-play addition of new grading criteria and multimedia courses.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>HTML5/CSS3</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>REST API</span>
+                        <span>Responsive UI</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 7: E-Commerce Website -->
+          <article class="project-detailed-card chocolate-frog-card" data-category="web" data-card-id="7">
+            <div class="cf-holographic-foil" aria-hidden="true"></div>
+            <div class="cf-card-inner">
+              <!-- FRONT FACE -->
+              <div class="cf-card-face cf-card-front glass-panel">
+                <div class="cf-ribbon-header">
+                  <span class="cf-card-number">✦ CHOCOLATE FROG WIZARD CARD · NO. 07 ✦</span>
+                  <span class="cf-rarity-pill">★ ALBUS DUMBLEDORE TIER</span>
+                </div>
+                <div class="card-badge-row">
+                  <span class="badge-tech">Web Technology Project</span>
+                  <span class="badge-academic">Academic Engineering</span>
+                </div>
+                <h3 class="p-card-title">E-Commerce Web Architecture</h3>
+                <p class="p-card-desc">
+                  Web Technology academic project featuring dynamic product listing, interactive shopping cart, checkout computation, and purchase flow.
+                </p>
+                
+                <div class="p-detail-box">
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚠️ The Problem:</span>
+                    <p>Demonstrating a robust, error-free full shopping cycle adhering to clean web engineering standards without bulky third-party dependencies.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">💡 The Solution:</span>
+                    <p>An architecturally clean e-commerce system featuring dynamic product catalogs, stateful shopping cart manipulation, and validated order workflows.</p>
+                  </div>
+                  <div class="p-detail-item">
+                    <span class="detail-label">⚡ Key Features:</span>
+                    <ul class="detail-list">
+                      <li>Dynamic product catalog categorization & search</li>
+                      <li>Real-time shopping cart calculation with quantity modifiers</li>
+                      <li>Client-side session persistence and state tracking</li>
+                      <li>Multi-step purchase checkout with form validation</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="p-tech-chips">
+                  <span>HTML5</span>
+                  <span>Modern CSS3</span>
+                  <span>JavaScript</span>
+                  <span>Web Technology</span>
+                  <span>Responsive UX</span>
+                </div>
+                <div class="p-action-row">
+                  <button type="button" class="cf-flip-trigger" aria-label="Flip Card to View Secret Architecture Blueprint">
+                    <span class="cf-flip-icon">🔄</span>
+                    <span class="cf-flip-text">Flip Card · Architecture</span>
+                  </button>
+                  <a href="#contact" class="p-link-btn">Inquire Spell <span class="arrow">→</span></a>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="cf-card-face cf-card-back">
+                <div class="cf-parchment-inner">
+                  <div class="cf-back-topbar">
+                    <div class="cf-back-seal">📜</div>
+                    <div class="cf-back-titles">
+                      <h4 class="cf-back-heading">THE ARCHITECT'S ARCHIVES</h4>
+                      <span class="cf-back-sub">Technical Architecture & Engineering Lore</span>
+                    </div>
+                    <span class="cf-card-badge">CARD #07</span>
+                  </div>
+
+                  <div class="cf-back-scroll-area">
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">⚡ End-to-End System Pipeline</h5>
+                      <p class="cf-arch-text">
+                        Dynamic Product Catalog Ingestion ➔ Reactive Client-Side Cart State Store ➔ Atomic Inventory Reservation Logic ➔ Multi-Step Form Validation & Order Manifest Dispatch.
+                      </p>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">🛡️ Core Engineering Decisions</h5>
+                      <ul class="cf-arch-bullets">
+                        <li><strong>Vanilla Efficiency:</strong> Engineered using native DOM methods without bloated library dependencies, achieving near-perfect 99+ Lighthouse performance.</li>
+                        <li><strong>Defensive Sanitization:</strong> Client-side input validation and strict price boundary verification prevent malicious client-side state manipulation.</li>
+                        <li><strong>State Persistence:</strong> Synchronizes cart state instantly with LocalStorage for flawless session continuity across browser reloads.</li>
+                      </ul>
+                    </div>
+
+                    <div class="cf-arch-block">
+                      <h5 class="cf-arch-title">📊 Impact & Stack Matrix</h5>
+                      <div class="cf-lore-chips">
+                        <span>Vanilla ES6+</span>
+                        <span>CSS Variables</span>
+                        <span>Web Storage API</span>
+                        <span>Input Sanitization</span>
+                        <span>Clean Code</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cf-back-actions">
+                    <button type="button" class="cf-flip-back-trigger" aria-label="Return to Wizard Card Front">
+                      <span>↩️ Return to Wizard Card</span>
+                    </button>
+                    <a href="#contact" class="cf-inquire-btn">Cast Inquire Spell →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. CHRONICLES — JOURNEY
+         ========================================================================= -->
+    <section id="journey" class="realm-section journey-section">
+      <!-- Background Video: Man in boat on Black Lake with glowing lanterns -->
+      <div class="section-video-bg-wrap">
+        <video class="section-video-bg journey-video" autoplay loop muted playsinline poster="thumb_Man_holding_glowing_lantern_20260926210241.jpg">
+          <source src="bg/Man_holding_glowing_lantern_20260926210241.mp4" type="video/mp4">
+        </video>
+        <div class="section-video-overlay journey-overlay"></div>
+      </div>
+
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CHRONICLES — JOURNEY</span>
+          <h2 class="section-heading glow-text">The Marauder's Chronicles of Jaya Surya</h2>
+          <div class="golden-divider"></div>
+          <p class="section-subtext">A multi-faceted journey uniting academic excellence, technology innovation, creative arts, and entrepreneurship.</p>
+        </div>
+
+        <div class="journey-layout">
+          <!-- Journey Cinematic Video Visual -->
+          <div class="journey-visual glass-panel">
+            <video class="wand-video" autoplay loop muted playsinline poster="ChatGPT Image Sep 25, 2026, 12_22_38 PM.png">
+              <source src="Wizard_holding_glowing_wand_20260925141653.mp4" type="video/mp4">
+              <img src="ChatGPT Image Sep 25, 2026, 12_22_38 PM.png" alt="Jaya Surya holding glowing wand weaving memories">
+            </video>
+            <div class="wand-caption glass-card">
+              <span>✦ Weaving Code, Art & Vision into Reality</span>
+            </div>
+          </div>
+
+          <!-- Comprehensive Journey Categories -->
+          <div class="chronicles-grid">
+
+            <!-- 1. Education -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">🎓</span>
+                <h3 class="chronicle-title">Education</h3>
+              </div>
+              <div class="chronicle-content">
+                <div class="edu-badge">Final Year B.Tech</div>
+                <h4 class="chronicle-subheading">B.Tech Computer Science & Engineering</h4>
+                <p class="chronicle-meta">Rajiv Gandhi College of Engineering and Technology</p>
+                <p class="chronicle-text">Engaged in comprehensive study of computer algorithms, artificial intelligence, software engineering, operating systems, and web technologies.</p>
+              </div>
+            </div>
+
+            <!-- 2. Qualifications & Certifications -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">📜</span>
+                <h3 class="chronicle-title">Qualifications & Credentials</h3>
+              </div>
+              <div class="chronicle-content">
+                <ul class="credentials-list">
+                  <li><span class="cred-dot">✦</span> <strong>Honours Diploma in Full Stack Development</strong></li>
+                  <li><span class="cred-dot">✦</span> <strong>English Typewriting – Junior</strong></li>
+                  <li><span class="cred-dot">✦</span> <strong>English Typewriting – Senior</strong></li>
+                  <li><span class="cred-dot">✦</span> <strong>Drawing Certification & Visual Arts</strong></li>
+                  <li><span class="cred-dot">✦</span> <strong>Chess Strategy & Tournament Competence</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 3. Leadership & Coordination -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">👑</span>
+                <h3 class="chronicle-title">Leadership & Campus Impact</h3>
+              </div>
+              <div class="chronicle-content">
+                <ul class="credentials-list">
+                  <li><span class="cred-dot">⚡</span> <strong>Science Club Leadership:</strong> Guiding student initiatives and scientific curiosity workshops.</li>
+                  <li><span class="cred-dot">⚡</span> <strong>College Event Coordination:</strong> Organizing campus technical symposiums, stages, and student activities.</li>
+                  <li><span class="cred-dot">⚡</span> <strong>Team Coordination:</strong> Uniting developers, designers, and peers across collaborative hackathons.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 4. Technical Journey -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">💻</span>
+                <h3 class="chronicle-title">Technical Journey</h3>
+              </div>
+              <div class="chronicle-content">
+                <div class="pills-flex">
+                  <span class="pill-item">Web Development</span>
+                  <span class="pill-item">AI Projects</span>
+                  <span class="pill-item">Android Development</span>
+                  <span class="pill-item">UI/UX Design</span>
+                  <span class="pill-item">Software Testing</span>
+                  <span class="pill-item">Creative Technology</span>
+                </div>
+                <p class="chronicle-text mt-2">Continuously architecting software with clean code standards, responsive interfaces, and forward-thinking intelligence.</p>
+              </div>
+            </div>
+
+            <!-- 5. Creative Journey -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">🎨</span>
+                <h3 class="chronicle-title">Creative Journey</h3>
+              </div>
+              <div class="chronicle-content">
+                <div class="pills-flex">
+                  <span class="pill-item">🎤 Singing</span>
+                  <span class="pill-item">🎭 Acting</span>
+                  <span class="pill-item">✏️ Drawing</span>
+                  <span class="pill-item">🎬 Video Editing</span>
+                  <span class="pill-item">🤖 AI Image Generation</span>
+                  <span class="pill-item">🎵 Music Content Creation</span>
+                </div>
+                <p class="chronicle-text mt-2">Harmonizing technology with creative expression to tell stories that evoke wonder and emotional resonance.</p>
+              </div>
+            </div>
+
+            <!-- 6. Content Creation & Tamil Music Series -->
+            <div class="chronicle-card glass-panel">
+              <div class="chronicle-header">
+                <span class="chronicle-icon">📱</span>
+                <h3 class="chronicle-title">Content Creation & Visuals</h3>
+              </div>
+              <div class="chronicle-content">
+                <div class="special-series-box">
+                  <span class="series-tag">FEATURED INSTAGRAM SERIES</span>
+                  <h4 class="series-title">“1000 Evergreen & Underrated Tamil Songs”</h4>
+                  <p class="series-desc">Curating and celebrating Tamil musical gems through creative visual storytelling, acoustic appreciation, and high-engagement Reels.</p>
+                  <a href="https://www.instagram.com/reelscoob/" target="_blank" rel="noopener noreferrer" class="series-ig-btn">
+                    <span>Explore Series on Instagram @reelscoob</span> <span class="arrow">↗</span>
+                  </a>
+                </div>
+                <div class="pills-flex mt-2">
+                  <span class="pill-item">Instagram Creation</span>
+                  <span class="pill-item">Music-Focused Reels</span>
+                  <span class="pill-item">Creative Visual Direction</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. OWL POST — CONTACT
+         ========================================================================= -->
+    <section id="contact" class="realm-section contact-section">
+      <!-- Background Broomstick Flight Video -->
+      <div class="contact-bg-wrap">
+        <video class="contact-flight-video" autoplay loop muted playsinline poster="ChatGPT Image Sep 25, 2026, 12_22_29 PM.png">
+          <source src="Man_flying_broomstick_above_castle_20260925144847.mp4" type="video/mp4">
+          <img src="ChatGPT Image Sep 25, 2026, 12_22_29 PM.png" alt="Jaya Surya flying on a broomstick above Hogwarts clouds">
+        </video>
+        <div class="contact-overlay"></div>
+      </div>
+
+      <div class="container contact-container">
+        <div class="section-header text-center">
+          <span class="section-tag">OWL POST — CONTACT</span>
+          <h2 class="section-heading glow-text">Have an idea, project or collaboration in mind?</h2>
+          <div class="golden-divider"></div>
+          <p class="contact-main-subtitle">
+            “Let’s build something meaningful with technology and creativity.”
+          </p>
+          <p class="section-subtext">
+            Dispatch an owl scroll directly to Jaya Surya's chamber.
+          </p>
+        </div>
+
+        <div class="owl-post-card glass-panel">
+          <div class="owl-stamp">
+            <span class="stamp-seal">J</span>
+            <div class="stamp-info">
+              <span class="stamp-text">OFFICIAL CITADEL DISPATCH — JAYA SURYA</span>
+              <span class="stamp-sub">Always open to interesting ideas, creative collaborations and technology projects.</span>
+            </div>
+          </div>
+
+          <form id="owl-dispatch-form" class="owl-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="wizard-name"><span class="form-icon">🧙‍♂️</span> Your Name</label>
+                <input type="text" id="wizard-name" class="parchment-input" placeholder="e.g. Albus Dumbledore / Recruiter / Collaborator" required>
+              </div>
+              <div class="form-group">
+                <label for="owl-address"><span class="form-icon">🦉</span> Your Email</label>
+                <input type="email" id="owl-address" class="parchment-input" placeholder="e.g. yourname@domain.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="scroll-subject"><span class="form-icon">📜</span> Subject</label>
+              <input type="text" id="scroll-subject" class="parchment-input" placeholder="e.g. Project Collaboration / Opportunity / Idea" required>
+            </div>
+
+            <div class="form-group">
+              <label for="scroll-message"><span class="form-icon">🪶</span> Message</label>
+              <textarea id="scroll-message" class="parchment-input" rows="4" placeholder="Pen your scroll here with details of your idea or inquiry..." required></textarea>
+            </div>
+
+            <button type="submit" id="dispatch-owl-btn" class="btn-arcane btn-primary btn-block">
+              <span class="btn-sparkle">🦉</span>
+              <span id="dispatch-btn-text">Release The Owl (Send Message)</span>
+            </button>
+
+            <!-- Dispatch Success Flying Notice -->
+            <div id="dispatch-success-banner" class="dispatch-success hidden glass-card">
+              <span class="success-icon">✨ 🦉 ✨</span>
+              <h4 id="dispatch-success-title">The Owl Has Taken Flight!</h4>
+              <p id="dispatch-success-desc">
+                Your message has been dispatched directly to Jaya Surya (<strong class="glow-link">jayasurya28806@gmail.com</strong>).
+              </p>
+              <div class="dispatch-direct-action" id="dispatch-direct-action" style="margin-top: 14px;">
+                <a id="dispatch-mailto-link" href="mailto:jayasurya28806@gmail.com" class="btn-arcane btn-secondary" style="font-size: 0.85rem; padding: 8px 18px; display: inline-flex;">
+                  <span>Open In Your Email Client</span> <span class="arrow">✉</span>
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <!-- Channels Bar: Email, GitHub, LinkedIn, Instagram, Resume -->
+          <div class="contact-channels-grid">
+            <a href="mailto:jayasurya28806@gmail.com" class="channel-pill glass-card" title="Direct Email: jayasurya28806@gmail.com">
+              <span class="channel-icon">📧</span>
+              <div class="ch-text">
+                <span class="ch-label">Email</span>
+                <span class="ch-val">jayasurya28806@gmail.com</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/jayasuryaa28" target="_blank" rel="noopener noreferrer" class="channel-pill glass-card" title="GitHub: @jayasuryaa28">
+              <span class="channel-icon">🐙</span>
+              <div class="ch-text">
+                <span class="ch-label">GitHub</span>
+                <span class="ch-val">@jayasuryaa28</span>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/jayasurya-jayasurya-a88401306?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="channel-pill glass-card" title="LinkedIn: Jaya Surya">
+              <span class="channel-icon">💼</span>
+              <div class="ch-text">
+                <span class="ch-label">LinkedIn</span>
+                <span class="ch-val">Jaya Surya</span>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/jayaa_suryaa?stkn=MWRlZzJ3dnFvdHVjbg==" target="_blank" rel="noopener noreferrer" class="channel-pill glass-card" title="Instagram: @jayaa_suryaa">
+              <span class="channel-icon">📸</span>
+              <div class="ch-text">
+                <span class="ch-label">Instagram</span>
+                <span class="ch-val">@jayaa_suryaa</span>
+              </div>
+            </a>
+
+            <a href="https://www.snapchat.com/add/jayasurya_romeo" target="_blank" rel="noopener noreferrer" class="channel-pill glass-card" title="Snapchat: @jayasurya_romeo">
+              <span class="channel-icon">👻</span>
+              <div class="ch-text">
+                <span class="ch-label">Snapchat</span>
+                <span class="ch-val">@jayasurya_romeo</span>
+              </div>
+            </a>
+
+            <button type="button" id="contact-resume-pill" class="channel-pill glass-card resume-pill" title="Open Hogwarts Parchment Resume & PDF">
+              <span class="channel-icon">📜</span>
+              <div class="ch-text">
+                <span class="ch-label">Parchment CV</span>
+                <span class="ch-val">View & Download</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Final Encouraging Message -->
+          <div class="contact-final-banner glass-card text-center">
+            <p>
+              🌟 <strong>“Always open to interesting ideas, creative collaborations and technology projects.”</strong>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Realm Footer -->
+  <footer class="realm-footer glass-panel">
+    <div class="container footer-content">
+      <div class="footer-seal">
+        <span class="seal-icon">✦</span>
+        <span class="seal-title">JAYA SURYA | CREATIVE TECHNOLOGIST</span>
+      </div>
+      <p class="footer-quote">
+        “Curious by nature, creative by passion, and always building something new.”
+      </p>
+      <div class="footer-copy">
+        Crafted with code, creativity and curiosity. © 2026 Jaya Surya. B.Tech Computer Science and Engineering, Rajiv Gandhi College of Engineering and Technology.
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       1. THE SORTING HAT CEREMONY MODAL
+       ========================================================================= -->
+  <div id="sorting-hat-modal" class="arcane-modal-overlay hidden" role="dialog" aria-modal="true" aria-label="The Sorting Hat Ceremony">
+    <div class="sorting-hat-card glass-panel">
+      <button type="button" id="close-sorting-hat" class="modal-corner-close" aria-label="Close Ceremony">✕</button>
+      
+      <div class="hat-avatar-wrap">
+        <span class="hat-emoji">🎩</span>
+        <div class="hat-speech-bubble" id="hat-speech-text">
+          “Step forward, young wizard! Let me peer inside your mind and see where your true magic belongs...”
+        </div>
+      </div>
+
+      <!-- Quiz Questions Box -->
+      <div id="sorting-quiz-step" class="sorting-quiz-step">
+        <div class="quiz-question-counter" id="quiz-counter">Incantation 1 of 3</div>
+        <h3 class="quiz-question-title" id="quiz-question-title">When tackling an impossible technical challenge, what drives you?</h3>
+        <div class="quiz-options-list" id="quiz-options-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Result Reveal Box -->
+      <div id="sorting-result-step" class="sorting-result-step hidden">
+        <div class="house-crest-badge" id="house-crest-badge">🦁</div>
+        <h2 class="house-name" id="house-name">GRYFFINDOR!</h2>
+        <p class="house-desc" id="house-desc"></p>
+        <div class="house-actions">
+          <button type="button" id="apply-house-aura-btn" class="btn-arcane btn-primary">
+            <span>✨ Wear House Magic Aura</span>
+          </button>
+          <button type="button" id="retake-sorting-btn" class="btn-arcane btn-secondary">
+            <span>↺ Consult Hat Again</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. OLLIVANDERS WAND CORE CUSTOMIZER MODAL
+       ========================================================================= -->
+  <div id="wand-core-modal" class="arcane-modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Ollivanders Wand Core Customizer">
+    <div class="wand-modal-card glass-panel">
+      <button type="button" id="close-wand-modal" class="modal-corner-close" aria-label="Close Wand Customizer">✕</button>
+      <div class="wand-modal-header text-center">
+        <span class="section-tag">OLLIVANDERS OF DIAGON ALLEY</span>
+        <h3 class="wand-modal-title glow-text">Choose Your Arcane Wand Core</h3>
+        <p class="wand-modal-sub">The wand chooses the wizard! Select your core to transform your cursor's trail, magic flares, and spell bursts.</p>
+      </div>
+
+      <div class="wand-cores-grid" id="wand-cores-grid">
+        <div class="wand-card glass-card active" data-core="phoenix">
+          <div class="wand-core-icon">🔥</div>
+          <h4 class="wand-core-name">Phoenix Feather</h4>
+          <span class="wand-wood">11" Holly · Flexible</span>
+          <p class="wand-core-desc">Golden flame & amber sparks. Noble, versatile, and bound to great destinies.</p>
+          <span class="wand-select-tag">Active Core</span>
+        </div>
+
+        <div class="wand-card glass-card" data-core="dragon">
+          <div class="wand-core-icon">🐉</div>
+          <h4 class="wand-core-name">Dragon Heartstring</h4>
+          <span class="wand-wood">12¾" Black Walnut · Unyielding</span>
+          <p class="wand-core-desc">Crimson flare & fiery scarlet sparks. High-power, bold, and blazing fast.</p>
+          <span class="wand-select-tag">Select Core</span>
+        </div>
+
+        <div class="wand-card glass-card" data-core="unicorn">
+          <div class="wand-core-icon">🦄</div>
+          <h4 class="wand-core-name">Unicorn Hair</h4>
+          <span class="wand-wood">10½" Willow · Supple</span>
+          <p class="wand-core-desc">Celestial moonlight & cyan stardust. Consistent, pure, and elegant.</p>
+          <span class="wand-select-tag">Select Core</span>
+        </div>
+
+        <div class="wand-card glass-card" data-core="thestral">
+          <div class="wand-core-icon">🔮</div>
+          <h4 class="wand-core-name">Thestral Tail Hair</h4>
+          <span class="wand-wood">15" Elder Wood · Masterwork</span>
+          <p class="wand-core-desc">Mystic violet & shadow nebula sparks. Mysterious, profound, and commanding.</p>
+          <span class="wand-select-tag">Select Core</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. HOGWARTS PARCHMENT RESUME MODAL & PRINT VIEW
+       ========================================================================= -->
+  <div id="parchment-resume-modal" class="parchment-modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Curriculum Vitae et Magica">
+    <div class="parchment-scroll-container">
+      <!-- Modal Action Bar -->
+      <div class="parchment-action-bar no-print">
+        <button type="button" id="print-resume-btn" class="btn-arcane btn-primary btn-sm" title="Print or Save as PDF">
+          <span>🖨️ Print / Save as PDF</span>
+        </button>
+        <button type="button" id="close-resume-btn" class="parchment-close-btn" title="Close Scroll" aria-label="Close Scroll">
+          <span>✕ Close Scroll</span>
+        </button>
+      </div>
+
+      <!-- Ancient Weathered Parchment Document -->
+      <div class="parchment-sheet" id="printable-resume">
+        <div class="parchment-wax-seal">
+          <span class="wax-monogram">J</span>
+        </div>
+
+        <div class="parchment-header">
+          <div class="ministry-crest">✦ HOGWARTS ACADEMY OF COMPUTER ENGINEERING & TECHNOLOGY ✦</div>
+          <h1 class="parchment-name">JAYA SURYA</h1>
+          <p class="parchment-title">Final-Year B.Tech Computer Science & Engineering · Creative Technologist · AI Engineer</p>
+          <div class="parchment-contact-row">
+            <span>📧 jayasurya28806@gmail.com</span>
+            <span>🐙 github.com/jayasuryaa28</span>
+            <span>💼 linkedin.com/in/jayasurya-jayasurya-a88401306</span>
+            <span>📸 @jayaa_suryaa</span>
+            <span>👻 @jayasurya_romeo</span>
+            <span>📍 Pondicherry, India</span>
+          </div>
+        </div>
+
+        <div class="parchment-divider"><span>⚔ ✦ ⚔</span></div>
+
+        <!-- Section 1: Executive Summary -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>ᚱ</span> Arcane Summary & Philosophy</h3>
+          <p class="p-sec-content">
+            Final-Year B.Tech Computer Science and Engineering student at Rajiv Gandhi College of Engineering & Technology, combining high-grade engineering in Artificial Intelligence, Full-Stack Web Development, and Android native systems with creative media direction. Proven track record in developing offline on-device neural voice models, decentralized mesh communication architectures, automated AI bug discovery frameworks, and scalable web platforms. Driven by the philosophy: <em>Technology + Creativity + Curiosity + Problem Solving</em>.
+          </p>
+        </div>
+
+        <!-- Section 2: Education & Credentials -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>ᛟ</span> Education & Academic Qualifications</h3>
+          <div class="p-resume-grid">
+            <div class="p-resume-item">
+              <div class="p-item-header">
+                <strong>B.Tech in Computer Science and Engineering</strong>
+                <span class="p-item-meta">2022 – 2026 (Final Year)</span>
+              </div>
+              <p class="p-item-inst">Rajiv Gandhi College of Engineering and Technology (Pondicherry University affiliated)</p>
+              <p class="p-item-detail">Rigorous coursework in Artificial Intelligence, Analysis of Algorithms, Software Testing & Quality Assurance, Operating Systems, Database Management Systems, and Web Technologies.</p>
+            </div>
+            <div class="p-resume-item">
+              <div class="p-item-header">
+                <strong>Honours Diploma in Full Stack Development</strong>
+                <span class="p-item-meta">Certified Distinction</span>
+              </div>
+              <p class="p-item-inst">Professional Engineering Credential</p>
+              <p class="p-item-detail">End-to-end full stack architecture: JavaScript ESNext, Node.js, REST APIs, responsive CSS3/HTML5 frameworks, data layer design, and production deployment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Technical Spellbook / Skills -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>ᛋ</span> Technical Arsenal & Disciplines</h3>
+          <div class="p-skills-list">
+            <p><strong>Languages & Core:</strong> Python, JavaScript (ES6+), Java, C, Modern HTML5, Advanced CSS3, SQL</p>
+            <p><strong>Artificial Intelligence & Systems:</strong> Knowledge Retrieval, Natural Language Processing (NLP), On-Device Neural Speech Models, Automated Software Testing, Mesh Networking</p>
+            <p><strong>Web & Mobile Technologies:</strong> Full-Stack Web Development, Node.js, REST APIs, Android Application Development, Bluetooth Low Energy (BLE)</p>
+            <p><strong>Tools & Quality:</strong> Git & GitHub, Software QA & Test Automation, UI/UX Design, Figma, Linux/Windows CLI</p>
+          </div>
+        </div>
+
+        <!-- Section 4: Flagship Innovations & Projects -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>ᚹ</span> Flagship Engineering Projects</h3>
+          <div class="p-resume-item">
+            <div class="p-item-header">
+              <strong>Integrated AI Knowledge Systems to Automate Bug Reporting</strong>
+              <span class="p-item-meta">Flagship AI Research</span>
+            </div>
+            <p class="p-item-detail">Built an automated diagnostic system integrating knowledge retrieval algorithms with automated test runners to inspect system failure traces, match past regressions, and auto-generate structured, high-fidelity defect reports with severity classification.</p>
+          </div>
+
+          <div class="p-resume-item">
+            <div class="p-item-header">
+              <strong>Rasagulla — Personal Offline Voice AI on Android</strong>
+              <span class="p-item-meta">On-Device AI Assistant</span>
+            </div>
+            <p class="p-item-detail">Architected a private, zero-latency speech-to-speech AI assistant running 100% locally on Android. Operates completely without internet, ensuring zero cloud dependency and absolute user privacy.</p>
+          </div>
+
+          <div class="p-resume-item">
+            <div class="p-item-header">
+              <strong>Irisyn — Offline Mesh Communication System</strong>
+              <span class="p-item-meta">Decentralized Mobile Network</span>
+            </div>
+            <p class="p-item-detail">Engineered an emergency peer-to-peer communicator using Bluetooth Low Energy (BLE) multi-hop mesh relays, allowing secure real-time messaging between Android devices without cellular signal or Wi-Fi.</p>
+          </div>
+
+          <div class="p-resume-item">
+            <div class="p-item-header">
+              <strong>DevDoctor AI & Academic Freelance Service Platform</strong>
+              <span class="p-item-meta">Full-Stack Web Architectures</span>
+            </div>
+            <p class="p-item-detail">Engineered dynamic web architectures with stateful session management, service listing, interactive payment calculations, and real-world client workflows.</p>
+          </div>
+        </div>
+
+        <!-- Section 5: Certifications & Honours -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>ᛏ</span> Certifications & Strategic Disciplines</h3>
+          <ul class="p-bullet-list">
+            <li><strong>Honours Diploma in Full Stack Web Development</strong> — End-to-end full stack proficiency.</li>
+            <li><strong>English Typewriting — Junior & Senior Grade Certifications</strong> — High accuracy keyboard execution.</li>
+            <li><strong>Government Drawing & Visual Arts Certification</strong> — Classical aesthetics, sketching, and UI visual layout.</li>
+            <li><strong>Competitive Chess Tournament Strategy</strong> — Tactical algorithmic thinking, endgame foresight, and pattern recognition.</li>
+          </ul>
+        </div>
+
+        <!-- Section 6: Creative Ventures -->
+        <div class="parchment-section">
+          <h3 class="p-sec-title"><span>✦</span> Creative Direction & Media</h3>
+          <p class="p-sec-content">
+            <strong>"1000 Evergreen & Underrated Tamil Songs" (@reelscoob)</strong>: High-engagement Instagram series curating and celebrating Tamil musical history through visual storytelling, acoustic appreciation, and creative video editing.
+          </p>
+        </div>
+
+        <div class="parchment-footer">
+          <span>Woven with Code, Curiosity & Vision · Jaya Surya · B.Tech CSE 2026</span>
+          <span class="parchment-seal-text">OFFICIAL CITADEL SCROLL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=8.3"></script>
+</body>
+</html>

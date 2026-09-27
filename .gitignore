@@ -1,0 +1,5 @@
+owl_frames/
+owl_frames_clean/
+owl_perfect_cycle/
+*.log
+.DS_Store
