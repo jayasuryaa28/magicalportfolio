@@ -2789,11 +2789,13 @@ body {
   }
 }
 
-/* Disable custom wand cursor completely on touch and mobile devices */
+/* Disable custom wand cursor and heavy canvases completely on touch and mobile devices */
 @media (hover: none), (pointer: coarse), (max-width: 991px) {
   #wand-cursor,
   .wand-cursor,
-  .wand-tip {
+  .wand-tip,
+  #magic-canvas,
+  #marauders-canvas {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
@@ -2805,10 +2807,54 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Eliminate GPU blur shader lag on mobile */
+  *, *::before, *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   body {
     padding-bottom: 76px;
     overflow-x: hidden;
   }
+
+  /* Video decoder optimization for mobile: Only hero video plays, rest use rich static artwork */
+  .section-video-bg-wrap video:not(.hero-video-bg) {
+    display: none !important;
+  }
+  .section-video-bg-wrap {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  .about-section .section-video-bg-wrap {
+    background-image: url('thumb_Man_on_balcony_viewing_castle_20260926205727.jpg') !important;
+  }
+  .skills-section .section-video-bg-wrap {
+    background-image: url('thumb_Wizard_casting_spell_from_book_20260926215952.jpg') !important;
+  }
+  .projects-section .section-video-bg-wrap {
+    background-image: url('thumb_Man_watching_floating_castles_20260926210704.jpg') !important;
+  }
+  .journey-section .section-video-bg-wrap {
+    background-image: url('thumb_Man_holding_glowing_lantern_20260926210241.jpg') !important;
+  }
+  .contact-section .section-video-bg-wrap {
+    background-image: url('ChatGPT Image Sep 25, 2026, 12_22_29 PM.png') !important;
+  }
+
+  .glass-panel,
+  .glass-card,
+  .realm-nav,
+  .nav-links,
+  .enchanted-pill,
+  .cf-card-front,
+  .spell-card,
+  .projects-control-bar,
+  .featured-project-banner {
+    background: rgba(13, 17, 24, 0.95) !important;
+  }
+
   .container {
     padding-left: 16px;
     padding-right: 16px;
@@ -2824,8 +2870,6 @@ body {
     right: 12px;
     flex-direction: column;
     background: rgba(13, 17, 26, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--gold-primary);
     border-radius: 20px;
     padding: 18px 16px;
@@ -2942,8 +2986,6 @@ body {
     flex-wrap: nowrap;
     border-radius: 30px;
     background: rgba(13, 17, 26, 0.94);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
   }
   .magical-btn-mini {
     padding: 6px 8px;

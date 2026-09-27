@@ -1009,53 +1009,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-links .nav-item');
 
-  window.addEventListener('scroll', () => {
-    let currentId = '';
-    const scrollY = window.pageYOffset + 240;
-
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      if (scrollY >= top && scrollY < top + height) {
-        currentId = section.getAttribute('id');
-      }
-    });
-
-    navItems.forEach(item => {
-      item.classList.remove('active');
-      if (item.getAttribute('href') === `#${currentId}`) {
-        item.classList.add('active');
-      }
-    });
-  }, { passive: true });
-
   /* --------------------------------------------------------------------------
-   * 8. MAGICAL SPELL PROGRESS BEAM & FAST SCROLL EMBERS
+   * 8. MAGICAL SPELL PROGRESS BEAM & SCROLL SPY (60FPS RAF-THROTTLED)
    * -------------------------------------------------------------------------- */
   const progressBar = document.getElementById('spell-progress-bar');
   let lastScrollY = window.scrollY;
-  let scrollTimeout = null;
+  let isScrollThrottled = false;
 
   window.addEventListener('scroll', () => {
-    // 1. Calculate and update progress beam
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPos = window.scrollY;
-    if (totalHeight > 0 && progressBar) {
-      const progressPercent = Math.min(100, Math.max(0, (scrollPos / totalHeight) * 100));
-      progressBar.style.width = `${progressPercent}%`;
-    }
+    if (isScrollThrottled) return;
+    isScrollThrottled = true;
 
-    // 2. Fast scroll magical ember bursts
-    const scrollDelta = Math.abs(scrollPos - lastScrollY);
-    if (scrollDelta > 25) {
-      for (let i = 0; i < 2; i++) {
-        particles.push(new Sparkle(
-          window.innerWidth - 30 + (Math.random() - 0.5) * 40,
-          Math.random() * window.innerHeight
-        ));
+    requestAnimationFrame(() => {
+      const scrollPos = window.scrollY;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      // 1. Progress beam
+      if (totalHeight > 0 && progressBar) {
+        const progressPercent = Math.min(100, Math.max(0, (scrollPos / totalHeight) * 100));
+        progressBar.style.width = `${progressPercent}%`;
       }
-    }
-    lastScrollY = scrollPos;
+
+      // 2. Active nav link highlight
+      const scrollYTarget = scrollPos + 220;
+      let currentId = '';
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollYTarget >= top && scrollYTarget < top + height) {
+          currentId = section.getAttribute('id');
+        }
+      });
+      if (currentId) {
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === `#${currentId}`);
+        });
+      }
+
+      // 3. Fast scroll embers (Desktop only — never on mobile to prevent touch scroll stutter)
+      if (!isTouchDevice) {
+        const scrollDelta = Math.abs(scrollPos - lastScrollY);
+        if (scrollDelta > 30) {
+          for (let i = 0; i < 2; i++) {
+            particles.push(new Sparkle(
+              window.innerWidth - 30 + (Math.random() - 0.5) * 40,
+              Math.random() * window.innerHeight
+            ));
+          }
+        }
+      }
+
+      lastScrollY = scrollPos;
+      isScrollThrottled = false;
+    });
   }, { passive: true });
 
   /* --------------------------------------------------------------------------
