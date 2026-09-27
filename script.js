@@ -924,15 +924,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.getElementById('nav-links');
 
   if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      playChimeNote(520, 0.2);
-    });
+    const handleToggle = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      initAudio();
+      const isOpen = navLinks.classList.toggle('open');
+      mobileToggle.classList.toggle('open', isOpen);
+      playChimeNote(isOpen ? 620 : 440, 0.2);
+    };
 
-    navLinks.querySelectorAll('a').forEach(link => {
+    mobileToggle.addEventListener('click', handleToggle);
+
+    // Close when tapping any link or button inside the menu
+    navLinks.querySelectorAll('a, button').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
+        mobileToggle.classList.remove('open');
       });
+    });
+
+    // Close when tapping outside the menu on mobile
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+        navLinks.classList.remove('open');
+        mobileToggle.classList.remove('open');
+      }
     });
   }
 
