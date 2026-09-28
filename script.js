@@ -1288,7 +1288,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typingRune) {
     const titles = [
       'Creative Technologist',
+      'Theoretical Physics Researcher (QSIL)',
       'Artificial Intelligence Engineer',
+      'Author of QSIL (DOI: 10.5281/zenodo.22996262)',
       'Full-Stack Web & Android Developer',
       'Tamil Music & Visual Storyteller',
       'B.Tech Computer Science Scholar'
